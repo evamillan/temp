@@ -1,0 +1,5 @@
+<h1 ng-if="!$ctrl.loggedIn" ng-click="$ctrl.login()">Log in</h1>
+<div ng-repeat="item in $ctrl.data">
+  <p>{{ item.artists[0].name }}</p>
+  <p><i>{{ item.name }}</i></p>
+</div>
