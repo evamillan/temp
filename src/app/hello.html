@@ -1,5 +1,59 @@
 <h1 ng-if="!$ctrl.loggedIn" ng-click="$ctrl.login()">Log in</h1>
+
+<div ng-if="$ctrl.loggedIn">
+  <p>Usar {{$ctrl.track.name}} de {{$ctrl.track.artists[0].name}}</p>
+  <form>
+    <md-input-container>
+      <label>o buscar canción</label>
+      <input ng-model="$ctrl.searchTrack" name="track" ng-change="$ctrl.search($ctrl.searchTrack)">
+    </md-input-container>
+  </form>
+  <div ng-repeat="item in $ctrl.tracks">
+    <p>{{ item.artists[0].name }} - <i>{{ item.name }}</i></p>
+  </div>
+  <md-slider-container flex="">
+        <md-input-container>
+          <input flex="" type="number" ng-model="$ctrl.min_energy" aria-label="bass" aria-controls="bass-slider">
+        </md-input-container>
+        <md-slider md-discrete="" ng-model="$ctrl.min_energy" min="0" max="1" step="0.1" aria-label="bass" class="md-primary" md-vertical=""></md-slider>
+
+        <h5>Bass</h5>
+      </md-slider-container>
+    <!-- <div class="" ng-if="$ctrl.step == 1">
+    <h1>¿Qué te apetece hoy?</h1>
+    <p ng-click="$ctrl.setMood('dance')">a) Algo de ritmo</p>
+    <p ng-click="$ctrl.setMood('sofa')">b) Sofá y mantita</p>
+    <p ng-click="$ctrl.setMood('concentration')">c) Concentrarme</p>
+    <p ng-click="$ctrl.setMood('crying')">d) Llorar</p>
+  </div> -->
+
+  <!-- <form class="form-inline">
+    <div class="form-group">
+      <input type="radio" value="high" ng-model="$ctrl.danceability" id="high">
+      <label for="high">Ritmo de la noche</label>
+    </div>
+    <div class="form-group">
+      <input type="radio" value="low" ng-model="$ctrl.danceability" id="low">
+      <label for="low">Sofá y mantita</label>
+    </div>
+  </form>
+  <form class="form-inline">
+    <div class="form-group">
+      <input type="radio" value="fib" ng-model="$ctrl.festivals" id="fib">
+      <label for="fib">FIB</label>
+    </div>
+    <div class="form-group">
+      <input type="radio" value="ps" ng-model="$ctrl.festivals" id="ps">
+      <label for="ps">Primavera Sound</label>
+    </div>
+    <div class="form-group">
+      <input type="radio" value="" ng-model="$ctrl.festivals" id="no-festival">
+      <label for="no-festival">Paso de festivales</label>
+    </div>
+  </form> -->
+  <p ng-click="$ctrl.getRecommendations()">Recomiéndame</p>
+</div>
+
 <div ng-repeat="item in $ctrl.data">
-  <p>{{ item.artists[0].name }}</p>
-  <p><i>{{ item.name }}</i></p>
+  <p>{{ item.artists[0].name }} - <i>{{ item.name }}</i></p>
 </div>
