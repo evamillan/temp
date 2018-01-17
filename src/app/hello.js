@@ -1,12 +1,12 @@
 export const hello = {
   template: require('./hello.html'),
-  controller($window, $log, Spotify) {
+  controller($window, $log, Spotify, $timeout, $scope) {
     this.userID = "";
     this.track = "";
     this.randomPlaylistTrack = "";
-    this.min_danceability = '0.1';
+    this.min_danceability = 0;
     this.max_danceability = '1';
-    this.min_energy = 0.0;
+    this.min_energy = 0;
     this.max_energy = '1';
     this.min_instrumentalness = '0.0';
     this.max_valence = '1';
@@ -72,15 +72,21 @@ export const hello = {
     };
 
     this.search = function(value) {
-      Spotify.search(value, 'track', {limit: 4}).then(data => {
+      Spotify.search(value, 'track', {limit: 5}).then(data => {
         this.tracks = data.data.tracks.items;
       });
     };
 
+    this.setTrack = function(track) {
+      this.track = track;
+      this.tracks = [];
+      this.searchTrack = "";
+    };
+
 
     this.getRecommendations = function () {
-      this.getUserTopTracks();
-      this.getTracksFromPlaylists();
+      // this.getUserTopTracks();
+      // this.getTracksFromPlaylists();
 
       Spotify.getRecommendations({
         seed_tracks: this.track.id,
@@ -90,7 +96,7 @@ export const hello = {
         min_energy: this.min_energy,
         min_instrumentalness: this.min_instrumentalness,
         max_valence: this.max_valence,
-        limit: 20
+        limit: 10
       }).then(data => {
         return this.data = data.data.tracks;
       });

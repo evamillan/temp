@@ -8,6 +8,7 @@ module.exports = function () {
         conf.paths.src
       ]
     },
+    port: 8080,
     open: false
   };
 };

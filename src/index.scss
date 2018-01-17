@@ -1,6 +1,45 @@
 body {
-  // background-color: #2C0D67;
-  // color: white;
-  // font-family: 'Lucida Console';
-  // font-size: 16px;
+  padding: 30px;
+  background-image: linear-gradient(120deg, #fccb90 0%, #d57eeb 100%);
+  color: #616161;
+}
+
+.sliders {
+  display: inline-block;
+  width: 200px;
+  height: 150px;
+  padding: 70px;
+}
+.slider {
+  -webkit-appearance: none;
+  height: 6px;
+  border-radius: 5px;
+  background: #FFFFFF;
+  outline: none;
+  opacity: 0.7;
+  -webkit-transition: .2s;
+  transition: opacity .2s;
+  transform: rotate(-90deg);
+}
+
+.slider:hover {
+  opacity: 1;
+}
+
+.slider::-webkit-slider-thumb {
+  -webkit-appearance: none;
+  appearance: none;
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: pointer;
+}
+
+.slider::-moz-range-thumb {
+  width: 12px;
+  height: 12px;
+  border-radius: 50%;
+  background: #FFFFFF;
+  cursor: pointer;
 }
