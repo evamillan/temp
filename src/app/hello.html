@@ -1,9 +1,59 @@
-<h1 ng-if="!$ctrl.loggedIn" ng-click="$ctrl.login()">Log in</h1>
-
-<div layout="row" layout-xs="column">
-  <div ng-if="$ctrl.loggedIn" flex>
-    <p>Usar {{$ctrl.track.name}} de {{$ctrl.track.artists[0].name}}</p>
-    <form>
+<div ng-if="!$ctrl.loggedIn">
+  <h1>NOT QUITE MY TEMPO</h1>
+  <p>Para usar esta app tienes que <span ng-click="$ctrl.login()">loguearte en Spotify</span>.</p>
+</div>
+  <div ng-if="$ctrl.loggedIn">
+    <div class="cover" ng-style="{'background-image':'url('+$ctrl.track.album.images[0].url+')'}">
+    </div>
+    <div class="gradient">
+        Usar <span>{{$ctrl.track.name}}</span> de {{$ctrl.track.artists[0].name}}
+      <form>
+        <md-input-container>
+          <label>o buscar canción</label>
+          <input ng-model="$ctrl.searchTrack" name="track" ng-change="$ctrl.search($ctrl.searchTrack)">
+        </md-input-container>
+      </form>
+      <div ng-repeat="item in $ctrl.tracks track by item.id">
+        <p ng-click="$ctrl.setTrack(item)">{{ item.artists[0].name }} - <i>{{ item.name }}</i></p>
+      </div>
+      <div flex>
+        <div ng-repeat="item in $ctrl.data">
+          <p>{{ item.artists[0].name }} - <i>{{ item.name }}</i></p>
+        </div>
+      </div>
+    </div>
+    <div layout="column" class="right">
+      <div layout="row" class="row">
+        <div flex="15">
+          <p>Energía</p>
+        </div>
+        <input type="range" ng-model="$ctrl.energy" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.energy }}
+      </div>
+  <div layout="row" class="row">
+        <div flex="15">
+          <p>Bailabilidad</p>
+        </div>
+        <input type="range" ng-model="$ctrl.danceability" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.danceability }}
+      </div>
+      <div layout="row" class="row">
+        <div flex="15">
+          <p>Instrumentalidad</p>
+        </div>
+        <input type="range" ng-model="$ctrl.instrumentalness" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.instrumentalness }}
+      </div>
+      <div layout="row" class="row">
+        <div flex="15">
+          <p>Alegría</p>
+        </div>
+        <input type="range" ng-model="$ctrl.valence" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.valence }}
+      </div>
+    </div>
+    </div>
+    <!-- <form>
       <md-input-container>
         <label>o buscar canción</label>
         <input ng-model="$ctrl.searchTrack" name="track" ng-change="$ctrl.search($ctrl.searchTrack)">
@@ -12,25 +62,34 @@
     <div ng-repeat="item in $ctrl.tracks track by item.id">
       <p ng-click="$ctrl.setTrack(item)">{{ item.artists[0].name }} - <i>{{ item.name }}</i></p>
     </div>
-    <div class="sliders" layout="column">
-      <div layout="column">
-        <input type="range" ng-model="$ctrl.min_energy" ng-change="$ctrl.getRecommendations()" min="0" max="1" step="0.1" class="slider">
-        <p>Energía</p>
-        {{ $ctrl.min_energy }}
-      </div>
-    </div>
-    <div class="sliders" layout="column">
-      <div layout="column">
-        <input type="range" ng-model="$ctrl.min_danceability" ng-change="$ctrl.getRecommendations()" min="0" max="1" step="0.1" class="slider">
-      </div>
-      <p>Bailabilidad</p>
-      {{ $ctrl.min_danceability }}
-    </div>
-  </div>
-  <div flex>
-    <div ng-repeat="item in $ctrl.data">
-      <p>{{ item.artists[0].name }} - <i>{{ item.name }}</i></p>
-    </div>
-  </div>
 
-</div>
+      <div layout="row" class="row">
+        <div flex="15">
+          <p>Energía</p>
+        </div>
+        <input type="range" ng-model="$ctrl.energy" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.energy }}
+      </div>
+
+
+      <div layout="row" class="row">
+        <div flex="15">
+          <p>Bailabilidad</p>
+        </div>
+        <input type="range" ng-model="$ctrl.danceability" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.danceability }}
+      </div>
+      <div layout="row" class="row">
+        <div flex="15">
+          <p>Instrumentalidad</p>
+        </div>
+        <input type="range" ng-model="$ctrl.instrumentalness" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.instrumentalness }}
+      </div>
+      <div layout="row" class="row">
+        <div flex="15">
+          <p>Alegría</p>
+        </div>
+        <input type="range" ng-model="$ctrl.valence" ng-change="$ctrl.getRecommendations()" min="0.0" max="1" step="0.1" class="slider" flex="40">
+        {{ $ctrl.valence }}
+      </div> -->
